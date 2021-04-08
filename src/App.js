@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import {TextField} from "@material-ui/core";
+import axios from 'axios'
+import useErrorBoundary from "use-error-boundary"
 
 
 const useStyles = makeStyles({
@@ -36,16 +38,28 @@ export default function App() {
         setValue('')
     }
 
-    useEffect(() => {
-        setTimeout(() => {(
+    // useEffect(() => {
+    //     setTimeout(() => {(
+    //
+    //         fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ccf3aee26b06d4238093a1863d04d55&units=metric`)
+    //             .then(response => response.json())
+    //             .then(json => setWeather(json)))
+    //     }, 3000)
+    //
+    // }, [city])
 
-            fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ccf3aee26b06d4238093a1863d04d55&units=metric`)
-                .then(response => response.json())
-                .then(json => setWeather(json)))
-        }, 3000)
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ccf3aee26b06d4238093a1863d04d55&units=metric`,
+            );
+
+            setWeather(result.data);
+        };
+
+        fetchData();
 
     }, [city])
-
     if (weather === null) {
         return <p>Loading data...</p>;
     }

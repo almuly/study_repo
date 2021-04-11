@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import {TextField} from "@material-ui/core";
 import axios from 'axios'
 import useErrorBoundary from "use-error-boundary"
-
+import {useSnackbar} from 'notistack';
 
 const useStyles = makeStyles({
     root: {
@@ -32,10 +32,16 @@ export default function App() {
     const [weather, setWeather] = useState(null);
     const [city, setCity] = useState('minsk');
     const [value, setValue] = useState('');
+    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
 
     const handleClick = () => {
         setCity(value)
         setValue('')
+    }
+    const handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            handleClick()
+        }
     }
 
     // useEffect(() => {
@@ -48,18 +54,35 @@ export default function App() {
     //
     // }, [city])
 
+    // useEffect(() => {
+    //     const fetchData =  () => {
+    //         const result =  axios().get( `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ccf3aee26b06d4238093a1863d04d55&units=metric`);
+    //
+    //         if (weather !== null) {
+    //             enqueueSnackbar('Everything is OK');
+    //         } else{
+    //             enqueueSnackbar('Something wrong');
+    //         }
+    //         setWeather(result.data);
+    //
+    //
+    //     };
+    //
+    //     fetchData();
+    //
+    // }, [city])
+
+
     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios(
-                `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ccf3aee26b06d4238093a1863d04d55&units=metric`,
-            );
-
-            setWeather(result.data);
-        };
-
-        fetchData();
-
-    }, [city])
+        const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ccf3aee26b06d4238093a1863d04d55&units=metric`;
+        axios.get(apiUrl)
+            .then((resp) => {
+                const allWeather = resp.data;
+                setWeather(allWeather);
+            })
+            .then(() => enqueueSnackbar('Everything is OK.'))
+            .catch(() => enqueueSnackbar('Something go wrong'))
+    }, [city]);
     if (weather === null) {
         return <p>Loading data...</p>;
     }
@@ -93,9 +116,10 @@ export default function App() {
                             <TextField
                                 type="text"
                                 value={value}
-                                onChange={(e) => setValue(e.target.value)}
+                                onChange={(e) => (setValue(e.target.value))}
                                 variant="filled"
                                 label="Enter location"
+                                onKeyPress={handleKeyPress}
                             />
                             <Button
                                 startIcon={<SearchIcon/>}

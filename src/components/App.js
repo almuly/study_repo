@@ -31,9 +31,9 @@ export default function App() {
     const classes = useStyles();
     const [weather, setWeather] = useState(null);
     const [city, setCity] = useState('minsk');
-    const [favourite, setFavourite] = useState([{name:'minsk',
-        temp:0,
-        date:Date.now()}])
+    const [favourite, setFavourite] = useState([{
+
+    }])
     const [value, setValue] = useState('');
     const {enqueueSnackbar, closeSnackbar} = useSnackbar();
 
@@ -48,15 +48,17 @@ export default function App() {
             handleClick()
         }
     }
+    let dateTag = new Date(Date.now()).toLocaleString()
     const addToFavourite = () => {
         setFavourite(
             [...favourite,
 
-                {id:weather.id,
-                    name:weather.name,
-                    date:Date.now(),
-                    temp:weather.main.temp
-            }]
+                {
+                    id: weather.id,
+                    name: weather.name,
+                    date: dateTag,
+                    temp: weather.main.temp
+                }]
         )
     }
     useEffect(() => {
@@ -89,7 +91,7 @@ export default function App() {
                             }}
                             className={classes.media}
                             image={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-                            title="Contemplative Reptile"
+
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
@@ -113,7 +115,7 @@ export default function App() {
                                 onKeyPress={handleKeyPress}
                             />
                             <Button
-                                startIcon={<SearchIcon />}
+                                startIcon={<SearchIcon/>}
                                 onClick={handleClick}
                                 color='primary'
                                 variant='contained'>
@@ -127,7 +129,7 @@ export default function App() {
             </div>
             {/*<pre>{JSON.stringify(weather, null, 2)}</pre>*/}
             {/*<pre>{JSON.stringify(favourite, null, 2)}</pre>*/}
-            <FavouriteList favourite={favourite} />
+            <FavouriteList favourite={favourite}/>
         </Container>
 
     );

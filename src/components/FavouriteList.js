@@ -1,5 +1,5 @@
 import React from "react";
-import FavouriteItem from "./FavoriteItem"
+import FavouriteItem from "./FavouriteItem"
 
 
 export default function FavouriteList({favourite}){

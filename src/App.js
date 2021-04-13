@@ -30,10 +30,9 @@ export default function App() {
     const classes = useStyles();
     const [weather, setWeather] = useState(null);
     const [city, setCity] = useState('minsk');
-    const [favourite, setFavourite] = useState({name:weather.name,
-        temp:weather.main.temp,
-        date:Date.now,
-    })
+    const [favourite, setFavourite] = useState([{name:'minsk',
+        temp:0,
+        date:Date.now()}])
     const [value, setValue] = useState('');
     const {enqueueSnackbar, closeSnackbar} = useSnackbar();
 
@@ -51,9 +50,11 @@ export default function App() {
     const addToFavourite = () => {
         setFavourite(
             [...favourite,
-                {name:weather.name,
-                    temp:weather.main.temp,
-                    date:Date.now,
+
+                {id:weather.id,
+                    name:weather.name,
+                    date:Date.now(),
+                    temp:weather.main.temp
             }]
         )
     }

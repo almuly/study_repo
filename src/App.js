@@ -14,6 +14,7 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios'
 import {useSnackbar} from 'notistack';
+import FavouriteList from "./FavouriteList";
 
 
 const useStyles = makeStyles({
@@ -123,11 +124,10 @@ export default function App() {
                         </CardActions>
                     </CardActionArea>
                 </Card>
-
-
             </div>
-            <pre>{JSON.stringify(weather, null, 2)}</pre>
-            <pre>{JSON.stringify(favourite, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(weather, null, 2)}</pre>*/}
+            {/*<pre>{JSON.stringify(favourite, null, 2)}</pre>*/}
+            <FavouriteList favourite={favourite} />
         </Container>
 
     );

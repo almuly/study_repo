@@ -84,7 +84,7 @@ export default function App() {
         }>
             <Container maxWidth="sm">
                 <div className="app">
-                    <Card className={classes.root}>
+                    <Card >
                         <CardActionArea>
                             <CardMedia
                                 style={{

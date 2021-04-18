@@ -9,7 +9,7 @@ return(
 
     <Card>
         {
-            history.map(item=><HistoryItem key={item.id} {...item}/>)
+            history?history.map(item=><HistoryItem key={item.id} {...item}/>):<p>nothing</p>
         }
     </Card>
 

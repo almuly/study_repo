@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { SnackbarProvider } from 'notistack';
+import {SnackbarProvider} from 'notistack';
+import {HistoryProvider} from "./components/History/HistoryContext";
 
 
 ReactDOM.render(
-  <React.StrictMode>
-      <SnackbarProvider maxSnack={3}>
+    <React.StrictMode>
+        <HistoryProvider>
+            <SnackbarProvider maxSnack={3}>
 
-    <App />
-      </SnackbarProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+                <App/>
+            </SnackbarProvider>
+        </HistoryProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

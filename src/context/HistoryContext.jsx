@@ -43,12 +43,11 @@ function useHistoryWeather() {
     const add = (weather) => dispatch({type: 'add', payload: weather})
     const remove = (id) => dispatch({type: 'remove',payload: id})
 
-    console.log(state)
+    // console.log(state)
 
 
     return {
         state,
-        dispatch,
         add,
         remove
     }

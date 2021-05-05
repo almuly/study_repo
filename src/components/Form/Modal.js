@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import FormLogIn from "./FormLogIn";
-import '../styles/Modal.css';
+import LogIn from "./LogIn";
+import '../../styles/Modal.css';
 
 const Modal = ({isShowing, hide}) => isShowing ? ReactDOM.createPortal(
     <React.Fragment>
@@ -15,7 +15,7 @@ const Modal = ({isShowing, hide}) => isShowing ? ReactDOM.createPortal(
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <FormLogIn />
+                <LogIn />
             </div>
         </div>
     </React.Fragment>, document.body

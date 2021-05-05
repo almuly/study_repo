@@ -1,5 +1,5 @@
 import React from "react";
-import {useHistoryWeather} from "./HistoryContext";
+import {useHistoryWeather} from "../../context/HistoryContext";
 import DeleteSharpIcon from '@material-ui/icons/DeleteSharp';
 import {CardContent, CardMedia, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
